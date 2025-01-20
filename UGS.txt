@@ -1,0 +1,22 @@
+( Adhesion Test G-code Program - Single Sample with Delay )
+G21         ; Set units to millimeters
+G90         ; Use absolute positioning
+(--- Start of Program ---)
+( Start at safety height Z = -1mm at X = 0mm )
+G0 X0 Z-1       ; Rapid move to starting position at safety height
+(--- Testing Single Sample in Positive X-Direction ---)
+( Move Z to contact marble )
+G1 Z0.05 F100      ; Move Z-axis up 1.05mm to Z = 0.025mm to make contact
+G1 X0.5 F50           ; Move X-axis +1mm while maintaining contact
+G1 Z-1 F100         ; Retract Z-axis back to safety height
+(--- Testing Single Sample in Negative X-Direction ---)
+( Move Z to contact marble )
+G1 Z0.05 F100      ; Move Z-axis up to make contact
+G1 X0 F50          ; Move X-axis -1mm while maintaining contact
+G1 Z-1 F100         ; Retract Z-axis back to safety height
+(--- Preload Testing: Up and Down in Z-Direction ---)
+( Move Z to contact marble )
+G1 Z0.05 F100      ; Move Z-axis up to make contact
+G4 P1            ; Delay for 1 second (P value is in seconds)
+G1 Z-1 F100         ; Retract Z-axis to safety height
+(--- End of Program ---)
